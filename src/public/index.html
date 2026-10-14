@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Auth System</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 525px;
+      padding: 36px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 12px 35px #00000012;
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      color: #172554;
+      font-size: 38px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #64748b;
+      font-size: 19px;
+      margin: 24px 0 30px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.65;
+    }
+
+    .tab {
+      flex: 1;
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .tab.active, .primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 8px;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: 2px solid #93c5fd;
+      border-color: #2563eb;
+    }
+
+    .primary {
+      width: 100%;
+      margin-top: 25px;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 9px;
+      overflow-wrap: anywhere;
+    }
+
+    .message.visible { display: block; }
+    .message.error { background: #fee2e2; color: #991b1b; }
+    .message.success { background: #dcfce7; color: #166534; }
+
+    .hidden { display: none !important; }
+
+    .account {
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eff6ff;
+      overflow-wrap: anywhere;
+    }
+
+    .logout {
+      width: 100%;
+      margin-top: 12px;
+      background: #dc2626;
+      color: white;
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 24px; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+
+  <script src="/app.js" defer></script>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Secure Auth</h1>
+    <p class="subtitle">Login or create your account</p>
+
+    <section id="authSection">
+      <div class="tabs">
+        <button type="button" id="registerTab" class="tab active">
+          Register
+        </button>
+        <button type="button" id="loginTab" class="tab">
+          Login
+        </button>
+      </div>
+
+      <form id="authForm">
+        <div id="nameGroup">
+          <label for="name">Full Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Enter your full name"
+            autocomplete="name"
+          >
+        </div>
+
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          minlength="8"
+          required
+        >
+
+        <button id="submitBtn" type="submit" class="primary">
+          Create Account
+        </button>
+      </form>
+
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="accountSection" class="account hidden">
+      <h2>Account Details</h2>
+      <p id="accountName"></p>
+      <p id="accountEmail"></p>
+      <button type="button" id="logoutBtn" class="logout">Logout</button>
+    </section>
+  </main>
+</body>
+</html>
